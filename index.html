@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKRota</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header> 
+        <a href="#">
+            <img width="110" height="40" src="src/images/tkrota-whitelogo.png">
+        </a>
+    </header>
+
+    <div class="home">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <ul>
+                    <li data-page="inicio" class="selecionado">Início</li>
+                    <li data-page="clientes">Clientes</li>
+                    <li data-page="rotas">Rotas</li>
+                    <li data-page="relatorios">Relatórios</li>
+                </ul>
+            </div>
+        </aside>
+
+        
+        <main>
+            <section id="inicio" class="aba ativa">
+                <div class="container">
+                    <div class="topo-content    ">
+                        <h2>Seja bem-vindo(a) a TKRota <br> <span>Gerencie a rota de seus clientes, pedidos e relatórios de forma eficiente.</span></h2>
+                    </div>    
+                </div>
+            </section>
+
+            <section id="clientes" class="aba">
+                <div class="container">
+
+                    <div class="topo">
+
+                    <div class="topo-content">
+                        <h2>Clientes <br> 
+                        <span>Gerencie seus clientes aqui.</span>
+                        </h2>
+                    </div>
+
+                        <button class="btn-adicionar cliente"> 
+                            <i class="fa-solid fa-plus"></i>Adicionar Cliente</button>
+
+                        <button class="btn-adicionar"> 
+                            <i class="fa-solid fa-plus"></i>Adicionar Visita</button>
+                    </div>
+
+
+                    <div class="middle">
+                        
+                        <div class="filtro">
+                            <button id="client-filter">
+                                <i class="fa-solid fa-filter"></i> Filtrar
+                            </button>
+                        </div>
+                        <div class="campo-pesquisa">
+                            <input type="search" name="pesquisa-cliente" id="pesquisaCliente" placeholder="Pesquisar...">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <!--<h3 class="textAbaClientes">Últimos clientes visitados:</h3><-->
+
+                    <div class="cliente-container">
+
+                        <div class="cliente-card">
+                            <a href="#"> 
+                                <span class="nomeCliente">Mercadinho Bom Preço</span> 
+                                <div class="cnpjCliente"><strong>CNPJ:</strong> 12.345.678/0001-90</div>
+                            </a>
+                        </div>
+
+                        <div class="cliente-card">
+                            <a href="#"> 
+                                <span class="nome">Assistência Tech Celular</span>
+                                <div class="cnpj"><strong>CNPJ:</strong> 98.765.432/0001-09</div>
+                            </a>
+                        </div>
+
+                        <div class="cliente-card">
+                            <a href="#"> 
+                                <span class="nome">Oficina do Zé</span>
+                                <div class="cnpj"><strong>CNPJ:</strong> 11.111.111/1111-11</div>
+                            </a>
+                        </div>
+
+                        <div class="cliente-card">
+                            <a href="#"> 
+                                <span class="nome">Bar do Chico</span> 
+                                <div class="cnpj"><strong>CNPJ:</strong> 22.222.222/2222-22</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                    
+
+
+            </section>
+
+            <section id="rotas" class="aba"></section>
+            <section id="relatorios" class="aba"></section>
+        </main>
+
+    </div>
+    
+
+    <script src="script.js"></script>   
+</body>
+</html>

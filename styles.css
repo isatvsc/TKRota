@@ -1,0 +1,200 @@
+:root{
+    --blue-color: rgb(9, 15, 68);
+    --light-blue-color: #16207c;
+    --light-blue-color2: #0c113d85;
+    --white-color: #f1f0ff;
+    --text-color: #444444;
+    --gray-color: rgba(95, 95, 95, 0.2);
+    --dark-gray-color: rgba(95, 95, 95, 0.1);
+    --light-gray-color: rgba(95, 95, 95, 0.05);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Manrope", sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: start;
+    background-color: var(--blue-color);
+    height: 40px;
+}
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home{
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar{
+    background-color: #fff;
+    width: 200px;
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 0 10px;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar-content{
+    padding: 10px;
+}
+
+.sidebar-content li{
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color);
+    border-radius: 20px;
+    list-style: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+    margin-top: 5px;
+}
+
+.sidebar-content li:hover{
+    border-radius: 20px;
+    background-color: var(--gray-color);
+}
+
+main{
+    flex: 1;
+    background-color: #fff;
+}
+
+.aba{
+    display: none;
+}
+
+.aba.ativa{
+    display: block;
+}
+
+.selecionado{
+    background-color: var(--gray-color);
+}
+
+
+
+
+
+/*        SECTION CLIENTES           */
+
+
+
+.topo{
+    color: var(--blue-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.topo-content h2{
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--blue-color);
+}
+
+.topo-content span{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--blue-color);
+}
+
+.topo .btn-adicionar{
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.topo .btn-adicionar:hover{
+    background-color: var(--light-blue-color);
+}
+
+.btn-adicionar.cliente{
+    margin-left: 550px;
+}
+
+.middle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 30px;
+}
+
+.middle .filtro button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--gray-color);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.middle .campo-pesquisa input{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--gray-color);
+    cursor: pointer;
+    width: 700px;
+    outline: none;
+}
+
+.textAbaClientes{
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.aba .cliente-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 100px;
+}
+
+.aba .cliente-card{
+    display: grid;
+    grid-template-columns: 900px 1fr;
+    width: 100%;
+    background-color: var(--gray-color) ;
+    font-size: 14px; 
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.cliente-card a{
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+}
+
+
+.cliente-card:hover {
+    background-color: rgba(105, 105, 105, 0.4);
+}
+
+.escondido{
+    display: none !important;
+}
