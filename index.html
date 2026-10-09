@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <body>
 
@@ -36,7 +40,7 @@
         <main>
             <section id="inicio" class="aba ativa">
                 <div class="container">
-                    <div class="topo-content    ">
+                    <div class="topo-content">
                         <h2>Seja bem-vindo(a) a TKRota <br> <span>Gerencie a rota de seus clientes, pedidos e relatórios de forma eficiente.</span></h2>
                     </div>    
                 </div>
@@ -53,7 +57,7 @@
                         </h2>
                     </div>
 
-                        <button class="btn-adicionar cliente"> 
+                        <button class="btn-adicionar cliente" data-bs-toggle="modal" data-bs-target="#adicionarCliente"> 
                             <i class="fa-solid fa-plus"></i>Adicionar Cliente</button>
 
                         <button class="btn-adicionar"> 
@@ -61,8 +65,234 @@
                     </div>
 
 
+        <div id="adicionarCliente" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h3 class="textCadastro">Cadastrar Clientes</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="formulario">
+
+                           
+                            <div class="row mb-3">
+                                <label for="inputEstabelecimento" class="col-sm-2 col-form-label">
+                                    Nome do Cliente:
+                                </label>
+
+                                <div class="campo">
+                                    <div class="col-sm-10">
+                                        <input 
+                                        type="text" 
+                                        class="form-control required" 
+                                        id="inputEstabelecimento" 
+                                        placeholder="Nome do Estabelecimento" 
+                                        >
+                                        <span class="mensagem-erro" id="erro-inputEstabelecimento"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                
+                                <label for="inputCNPJ" class="col-sm-2 col-form-label">
+                                    CNPJ:
+                                </label>
+
+                                <div class="campo">
+                                    <div class="col-sm-10">
+                                        <input 
+                                        type="text" 
+                                        class="form-control required" 
+                                        id="inputCNPJ" 
+                                        placeholder="Ex: 12.345.678/0001-99" 
+                                        >
+                                        <span class="mensagem-erro" id="erro-inputCNPJ"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <fieldset class="row mb-3">
+                                
+                                <label for="inputCategorias" class="col-sm-2 col-form-label"> Categoria:</label>
+                                <div class="campo">
+                                    <div class="col-sm-10">
+                                        
+                                        <select class="form-select form-select-sm required" aria-label="Categorias" id="inputCategorias" >
+                                            <option value="" selected disabled>Escolher...</option>
+                                            <option value="1">Mercados e Mercadinhos</option>
+                                            <option value="2">Loja de Material de Construção</option>
+                                            <option value="3">Farmácias e Drogarias</option>
+                                            <option value="4">Papelarias e Livrarias</option>
+                                            <option value="5">Lojas de Eletrônico e Informática</option>
+                                            <option value="6">Bares</option>
+                                            <option value="7">Restaurantes e Lanchonetes</option>
+                                            <option value="8">Oficinas mecânicas e autopeças</option>
+                                            <option value="9">Salões de beleza e barbearias</option>
+                                        </select>
+                                        <span class="mensagem-erro" id="erro-inputCategorias"></span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row mb-3">
+                                
+                                <label for="inputTel" class="col-sm-2 col-form-label">
+                                    Telefone: 
+                                </label>
+
+                                <div class="campo">
+                                    <div class="col-sm-10">
+                                        <input 
+                                        type="tel" 
+                                        class="form-control required" 
+                                        id="inputTel" 
+                                        placeholder="Ex: (11) 98765-4321" 
+                                        >
+                                        <span class="mensagem-erro" id="erro-inputTel"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                
+                                <label for="inputNome" class="col-sm-2 col-form-label">
+                                    Nome do Contato:
+                                </label>
+
+                                <div class="campo">
+                                    <div class="col-sm-10">
+                                        <input 
+                                        type="text" 
+                                        class="form-control required" 
+                                        id="inputNome" 
+                                        placeholder="Quem atende na loja" 
+                                        >
+                                        <span class="mensagem-erro" id="erro-inputNome"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                                <label for="inputCEP" class="col-sm-2 col-form-label">CEP: </label>
+                                <div class="campo">
+                                    <div class="col-md-2">
+                                        <input 
+                                        type="text" 
+                                        class="form-control required" 
+                                        id="inputCEP" 
+                                        placeholder="Ex: 12345-678" 
+                                        >
+                                        <span class="mensagem-erro" id="erro-inputCEP"></span>
+                                    </div>
+                                </div>
+                            
+                            
+                            <label for="inputRua" class="col-sm-2 col-form-label">Rua: </label>
+                            <div class="campo">
+                                <div class="col-12">
+                                    <input 
+                                    type="text" 
+                                    class="form-control required" 
+                                    id="inputRua" 
+                                    placeholder="Ex: 1234 Rua Principal" 
+                                    >
+                                    <span class="mensagem-erro" id="erro-inputRua"></span>
+                                </div>
+                            </div>
+
+                           
+                            <label for="inputBairro" class="col-sm-2 col-form-label">Bairro: </label>
+                            <div class="campo">   
+                                <div class="col-12">
+                                    <input 
+                                    type="text" 
+                                    class="form-control required" 
+                                    id="inputBairro" 
+                                    placeholder="Ex: Centro" 
+                                    >
+                                    <span class="mensagem-erro" id="erro-inputBairro"></span>
+                                </div>
+                            </div>
+
+                            
+                            <label for="inputCidade" class="col-sm-2 col-form-label">Cidade:</label>
+                            <div class="campo">    
+                                <div class="col-md-6">
+                                    <input 
+                                    type="text" 
+                                    class="form-control required" 
+                                    id="inputCidade" 
+                                    placeholder="Ex: Itapipoca" 
+                                    >
+                                    <span class="mensagem-erro" id="erro-inputCidade"></span>
+                                </div>
+                            </div>
+
+                            
+                            <label for="inputEstado" class="col-sm-2 col-form-label">Estado: </label>
+                            <div class="campo">    
+                                <div class="col-md-4">
+                                    <select id="inputEstado" class="form-select required" >
+                                    <option value="" selected disabled>Escolher...</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AP">AP</option>
+                                    <option value="AM">AM</option>
+                                    <option value="BA">BA</option>
+                                    <option value="CE">CE</option>
+                                    <option value="DF">DF</option>
+                                    <option value="ES">ES</option>
+                                    <option value="GO">GO</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MT">MT</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MG">MG</option>
+                                    <option value="PA">PA</option>
+                                    <option value="PB">PB</option>
+                                    <option value="PR">PR</option>
+                                    <option value="PE">PE</option>
+                                    <option value="PI">PI</option>
+                                    <option value="RJ">RJ</option>
+                                    <option value="RN">RN</option>
+                                    <option value="RS">RS</option>
+                                    <option value="RO">RO</option>
+                                    <option value="RR">RR</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SP">SP</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TO">TO</option>
+                                    </select>
+                                    <span class="mensagem-erro" id="erro-inputEstado"></span>
+                                </div>
+                            </div>
+
+                            
+                            
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                    Cadastrar
+                            </button>
+                        </div>
+
+
+                        </form>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+
+
+
                     <div class="middle">
-                        
+
                         <div class="filtro">
                             <button id="client-filter">
                                 <i class="fa-solid fa-filter"></i> Filtrar
@@ -81,36 +311,83 @@
                     <div class="cliente-container">
 
                         <div class="cliente-card">
-                            <a href="#"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
                                 <span class="nomeCliente">Mercadinho Bom Preço</span> 
                                 <div class="cnpjCliente"><strong>CNPJ:</strong> 12.345.678/0001-90</div>
                             </a>
                         </div>
 
                         <div class="cliente-card">
-                            <a href="#"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
                                 <span class="nome">Assistência Tech Celular</span>
                                 <div class="cnpj"><strong>CNPJ:</strong> 98.765.432/0001-09</div>
                             </a>
                         </div>
 
                         <div class="cliente-card">
-                            <a href="#"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
                                 <span class="nome">Oficina do Zé</span>
                                 <div class="cnpj"><strong>CNPJ:</strong> 11.111.111/1111-11</div>
                             </a>
                         </div>
 
                         <div class="cliente-card">
-                            <a href="#"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
                                 <span class="nome">Bar do Chico</span> 
                                 <div class="cnpj"><strong>CNPJ:</strong> 22.222.222/2222-22</div>
                             </a>
                         </div>
                     </div>
-                </div>
-                    
 
+                    <div id="janelaCliente" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                            
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="map">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1720.6318923430688!2d-39.5931957662927!3d-3.4995651841012894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c048ea3199ad1b%3A0x95aca1df74c7dd14!2sMercadinho%20Bom%20Preco!5e0!3m2!1spt-BR!2sbr!4v1791380265937!5m2!1spt-BR!2sbr" 
+                                width="600" 
+                                height="450" 
+                                style="width:100%; height:300px; border:0; pointer-events: none;"
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                </div>
+
+                                <div class="information">
+                                    <div class="text">
+                                    <h3>Mercadinho Bom Preço</h3>
+                                    <p>12.345.678/0001-90</p>
+                                    </div>
+
+                                    <div class="image">
+                                        <img 
+                                        src="src/images/tkrota-whitelogo.png" 
+                                        alt="logo TK2000 branca"
+                                        height="30"
+                                        width="90"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div id="calcularRota" class="btnRota">
+                                    <button><i class="fa-solid fa-location-dot"></i> Calcular Rota</button>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
 
             </section>
 
@@ -120,7 +397,7 @@
 
     </div>
     
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="script.js"></script>   
 </body>
 </html>
