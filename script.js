@@ -1,3 +1,79 @@
+const CHAVE = "clientes";
+
+function lerClientes(){
+  const texto = localStorage.getItem(CHAVE);
+  return texto ? JSON.parse(texto) : [];
+}
+
+function salvarClientes(lista){
+  localStorage.setItem(CHAVE, JSON.stringify(lista));
+}
+
+function criarCard(cliente){
+
+    const link = document.createElement("a");
+    link.href = "#";
+    link.dataset.bsToggle = "modal";
+    link.dataset.bsTarget = "#janelaCliente";
+
+    const card = document.createElement("div");
+    card.className = "cliente-card";
+    card.dataset.id = cliente.id;
+
+    const nome = document.createElement("span");
+    nome.className = "nomeCliente";
+    nome.textContent = cliente.nome;
+
+    const cnpj = document.createElement("div");
+    cnpj.className = "cnpjCliente";
+    const forte = document.createElement("strong");
+    forte.textContent = "CNPJ:";
+    cnpj.append(forte, " " + cliente.cnpj);
+
+    const botao = document.createElement("button")
+    botao.className = "fa-solid fa-ellipsis-vertical btnElipse"
+    botao.dataset.bsToggle = "dropdown"
+    botao.type = "button"
+
+    const ulBotao = document.createElement("ul")
+    ulBotao.className = "dropdown-menu"
+
+    const li = document.createElement("li")
+
+    const a1 = document.createElement("a")
+    a1.className = "dropdown-item firstItem"
+    a1.href = "#"
+    a1.textContent = "Excluir"
+
+    const a2 = document.createElement("a")
+    a2.className = "dropdown-item"
+    a2.href = "#"
+    a2.textContent = "Editar"
+
+
+    link.append(nome, cnpj);
+    li.append(a1, a2)
+    ulBotao.append(li)
+    botao.append(ulBotao)
+    card.append(link, botao);
+  
+  return card;
+}
+
+
+
+function mostrarClientes(){
+  const container = document.querySelector(".cliente-container");
+  container.innerHTML = "";
+  lerClientes().forEach(cliente => container.append(criarCard(cliente)));
+}
+
+mostrarClientes();
+
+
+
+
+function trocarAba(){
 const links = document.querySelectorAll(".sidebar-content li");
 const abas = document.querySelectorAll(".aba");
 
@@ -14,27 +90,24 @@ links.forEach((link) => {
     link.classList.add("selecionado");
   });
 });
+}
 
-
+trocarAba();
 
 function pesquisarClientes(){
-  const clientes = document.querySelectorAll(".cliente-card");
-
   const campoPesquisa = document.getElementById("pesquisaCliente");
-  
+
   campoPesquisa.addEventListener("input", () => {
     const text = campoPesquisa.value.toLowerCase();
 
-
-    clientes.forEach((cliente) => {
-      const conteudo = cliente.textContent.toLowerCase()
-      const contem = conteudo.includes(text);
-      cliente.classList.toggle("escondido", !contem)
-    })
-})
+    document.querySelectorAll(".cliente-card").forEach((cliente) => {
+      const conteudo = cliente.textContent.toLowerCase();
+      cliente.classList.toggle("escondido", !conteudo.includes(text));
+    });
+  });
 }
 
-pesquisarClientes()
+pesquisarClientes();
 
 
 
@@ -117,6 +190,38 @@ function permitirCadastro(){
     return
     }
 
+    const clientes = lerClientes();
+
+    const cnpjNumeros = cnpj.value.replace(/\D/g, "");
+    const repetido = clientes.some(c => c.cnpj.replace(/\D/g, "") === cnpjNumeros);
+
+    if(repetido){
+      cnpj.classList.add("erro");
+      if(spanErroCNPJ){
+        spanErroCNPJ.textContent = "Já existe um cliente com esse CNPJ.";
+      }
+      return;
+    }
+
+    const categoria = document.getElementById("inputCategorias");
+
+    clientes.push({
+      id: Date.now(),
+      nome: document.getElementById("inputEstabelecimento").value.trim(),
+      cnpj: cnpj.value.trim(),
+      categoria: categoria.options[categoria.selectedIndex].textContent,
+      telefone: document.getElementById("inputTel").value.trim(),
+      contato: document.getElementById("inputNome").value.trim(),
+      cep: document.getElementById("inputCEP").value.trim(),
+      rua: document.getElementById("inputRua").value.trim(),
+      bairro: document.getElementById("inputBairro").value.trim(),
+      cidade: document.getElementById("inputCidade").value.trim(),
+      estado: document.getElementById("inputEstado").value
+    });
+
+    salvarClientes(clientes);
+    mostrarClientes();
+
     const janela = bootstrap.Modal.getInstance(document.getElementById("adicionarCliente"));
     janela.hide();
   })
@@ -183,3 +288,45 @@ function limparEndereco(){
 }
 
 buscarCEP();
+
+function infoClientes(){
+  const cards = [...document.querySelectorAll(".cliente-card")]
+
+  cards.forEach((card) =>{
+    card.addEventListener("click", (evento) =>{
+     const idCard = Number(card.dataset.id)
+
+    const cliente = lerClientes().find((cliente) => cliente.id === idCard)
+    
+    const nome = document.getElementById("modalNome");
+    nome.textContent = cliente.nome;
+
+    const cnpj = document.getElementById("modalCNPJ");
+    cnpj.textContent = cliente.cnpj;
+
+    const endereco = cliente.cidade + ", " + cliente.bairro + ", " + cliente.cep.value + ", " + cliente.rua
+
+    const iframe = document.getElementById("iframe")
+    iframe.src = "https://www.google.com/maps?q=" + encodeURIComponent(endereco) + "&z=13&output=embed"
+
+    })
+  })
+
+
+}
+
+infoClientes()
+
+/*function btnElipse(){
+  const elipse = document.querySelectorAll(".btnElipse")
+
+
+  elipse.forEach(botao => {
+    botao.addEventListener("click", () => {
+      
+    })})
+    
+
+}
+
+btnElipse()*/

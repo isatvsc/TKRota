@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,7 @@
         <aside class="sidebar">
             <div class="sidebar-content">
                 <ul>
-                    <li data-page="inicio" class="selecionado">Início</li>
+                    <li data-page="inicio" class="selecionado">Dashboard</li>
                     <li data-page="clientes">Clientes</li>
                     <li data-page="rotas">Rotas</li>
                     <li data-page="relatorios">Relatórios</li>
@@ -306,36 +306,18 @@
                 </div>
 
                 <div class="container">
-                    <!--<h3 class="textAbaClientes">Últimos clientes visitados:</h3><-->
-
                     <div class="cliente-container">
 
-                        <div class="cliente-card">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
-                                <span class="nomeCliente">Mercadinho Bom Preço</span> 
-                                <div class="cnpjCliente"><strong>CNPJ:</strong> 12.345.678/0001-90</div>
-                            </a>
-                        </div>
-
-                        <div class="cliente-card">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
-                                <span class="nome">Assistência Tech Celular</span>
-                                <div class="cnpj"><strong>CNPJ:</strong> 98.765.432/0001-09</div>
-                            </a>
-                        </div>
-
-                        <div class="cliente-card">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
-                                <span class="nome">Oficina do Zé</span>
-                                <div class="cnpj"><strong>CNPJ:</strong> 11.111.111/1111-11</div>
-                            </a>
-                        </div>
-
-                        <div class="cliente-card">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#janelaCliente"> 
-                                <span class="nome">Bar do Chico</span> 
-                                <div class="cnpj"><strong>CNPJ:</strong> 22.222.222/2222-22</div>
-                            </a>
+                     <div class="input-group mb-3">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
                         </div>
                     </div>
 
@@ -349,27 +331,31 @@
 
                             <div class="modal-body">
                                 <div class="map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1720.6318923430688!2d-39.5931957662927!3d-3.4995651841012894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c048ea3199ad1b%3A0x95aca1df74c7dd14!2sMercadinho%20Bom%20Preco!5e0!3m2!1spt-BR!2sbr!4v1791380265937!5m2!1spt-BR!2sbr" 
+                                <iframe 
                                 width="600" 
                                 height="450" 
-                                style="width:100%; height:300px; border:0; pointer-events: none;"
+                                style="width:100%; height:300px; border:0; "
                                 allowfullscreen="" 
                                 loading="lazy" 
-                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                id="iframe"
+                                z="13"
+                                ></iframe>
                                 </div>
 
                                 <div class="information">
                                     <div class="text">
-                                    <h3>Mercadinho Bom Preço</h3>
-                                    <p>12.345.678/0001-90</p>
+                                    <h3 id="modalNome">Mercadinho Bom Preço</h3>
+                                    <p id="modalCNPJ">12.345.678/0001-90</p>
                                     </div>
 
                                     <div class="image">
                                         <img 
                                         src="src/images/tkrota-whitelogo.png" 
                                         alt="logo TK2000 branca"
-                                        height="30"
-                                        width="90"
+                                        height="40"
+                                        width="100"
+                                        id="modalLocal"
                                         >
                                     </div>
                                 </div>
@@ -393,6 +379,9 @@
 
             <section id="rotas" class="aba"></section>
             <section id="relatorios" class="aba"></section>
+
+
+            
         </main>
 
     </div>
