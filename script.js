@@ -9,7 +9,7 @@ function salvarClientes(lista){
   localStorage.setItem(CHAVE, JSON.stringify(lista));
 }
 
-function criarCard(cliente){
+function criarCard(cliente){ // essa funcção cria os cards de clientes dinamicamente
 
     const link = document.createElement("a");
     link.href = "#";
@@ -19,6 +19,7 @@ function criarCard(cliente){
     const card = document.createElement("div");
     card.className = "cliente-card";
     card.dataset.id = cliente.id;
+    card.dataset.categoria = cliente.categoria;
 
     const nome = document.createElement("span");
     nome.className = "nomeCliente";
@@ -40,19 +41,27 @@ function criarCard(cliente){
 
     const li = document.createElement("li")
 
-    const a1 = document.createElement("a")
-    a1.className = "dropdown-item firstItem"
-    a1.href = "#"
-    a1.textContent = "Excluir"
+    const b1 = document.createElement("button")
+    b1.className = "dropdown-item excluirCliente"
+    b1.textContent = "Excluir"
 
-    const a2 = document.createElement("a")
-    a2.className = "dropdown-item"
-    a2.href = "#"
-    a2.textContent = "Editar"
+    b1.addEventListener("click", () =>{
+      if(!confirm ("Deseja mesmo excluir esse cliente?")) return;
+      const clientes = lerClientes();
+      listaNova = clientes.filter((item) => item.id !== cliente.id)
+      salvarClientes(listaNova)
+      mostrarClientes();
+      filtrarClientes();
+      aplicarFiltros();
+    })
+
+    const b2 = document.createElement("button")
+    b2.className = "dropdown-item"
+    b2.textContent = "Editar"
 
 
     link.append(nome, cnpj);
-    li.append(a1, a2)
+    li.append(b2, b1)
     ulBotao.append(li)
     botao.append(ulBotao)
     card.append(link, botao);
@@ -62,7 +71,7 @@ function criarCard(cliente){
 
 
 
-function mostrarClientes(){
+function mostrarClientes(){ // essa função mostra os cards no container da section clientes
   const container = document.querySelector(".cliente-container");
   container.innerHTML = "";
   lerClientes().forEach(cliente => container.append(criarCard(cliente)));
@@ -70,10 +79,30 @@ function mostrarClientes(){
 
 mostrarClientes();
 
+async function copiarCNPJ() {
+  try {
+   
+    const cnpj = document.getElementById("modalCNPJ").innerHTML;
+    
+    
+    await navigator.clipboard.writeText(cnpj);
+
+    const toast = document.getElementById('toastCNPJ');
+    toast.classList.add('mostrar');
+    
+    setTimeout(() => {
+      toast.classList.remove('mostrar');
+    }, 3000);
+
+  } catch (err) {
+    console.error('Erro ao copiar CNPJ:', err);
+    alert('Não foi possível copiar o CNPJ automaticamente.');
+  }
+}
 
 
 
-function trocarAba(){
+function trocarAba(){ // essa função navega pelas sections
 const links = document.querySelectorAll(".sidebar-content li");
 const abas = document.querySelectorAll(".aba");
 
@@ -94,7 +123,7 @@ links.forEach((link) => {
 
 trocarAba();
 
-function pesquisarClientes(){
+function pesquisarClientes(){ // essa função é a de pesquisar clientes
   const campoPesquisa = document.getElementById("pesquisaCliente");
 
   campoPesquisa.addEventListener("input", () => {
@@ -109,8 +138,86 @@ function pesquisarClientes(){
 
 pesquisarClientes();
 
+function aplicarFiltros(){
+  const textoPesquisa = document.getElementById("pesquisaCliente").value
+  textoPesquisa.toLowerCase()
+
+  const listaCaixinhas = Array.from(document.querySelectorAll("#menu input:checked"))
+
+  categoriasMarcadas = listaCaixinhas.map((caixa) => caixa.value)
+
+  const cards = document.querySelectorAll(".cliente-card")
+
+  cards.forEach(card => {
+    
+    const passouFiltro = categoriasMarcadas.length === 0 || categoriasMarcadas.includes(card.dataset.categoria)
+    /*const passouPesquisa = card.textContent.includes(pesquisarClientes())
+    passouPesquisa.toString().toLowerCase()*/
+  
+     
+    const deveAparecer = /*passouPesquisa &&*/ passouFiltro 
+
+    //console.log(card.dataset.categoria)    
+    //console.log(categoriasMarcadas)
+    //console.log(passouPesquisa)
+    //console.log(passouFiltro)
+
+    card.classList.toggle("escondido", !deveAparecer)
+
+  });
+  
+
+}
 
 
+function filtrarClientes(){
+  const campoFiltro = document.getElementById("menu")
+  campoFiltro.innerHTML = ""
+
+    const clientes = lerClientes()
+
+    const todasCategorias = clientes.map((cliente) => cliente.categoria)
+
+    const categoriasFiltros = Array.from(new Set(todasCategorias))
+    categoriasFiltros.sort()
+    
+
+    categoriasFiltros.forEach((categoria, posicao) => {
+      const div = document.createElement("div")
+      div.className = "form-check"
+
+      const input = document.createElement("input")
+      input.type = "checkbox"
+      input.value = categoria
+      input.id = "filtro-" + posicao
+      input.className = "form-check-input"
+
+      const label = document.createElement("label")
+      label.textContent = categoria
+      label.className = "form-check-label"
+      label.htmlFor = input.id
+      
+      div.append(label, input)
+      campoFiltro.append(div)
+    })
+
+      const divBtn = document.createElement("div")
+      divBtn.className = "aplicarFiltro"
+
+      const botao = document.createElement("button")
+      botao.className = "btnAplicarFiltro"
+      botao.textContent = "Aplicar Filtros"
+      botao.onclick = () => aplicarFiltros()
+      
+      
+
+      divBtn.append(botao)
+      campoFiltro.append(divBtn)
+
+          
+
+}
+filtrarClientes()
 
 
 /*      FORMULARIO       */
@@ -293,8 +400,8 @@ function infoClientes(){
   const cards = [...document.querySelectorAll(".cliente-card")]
 
   cards.forEach((card) =>{
-    card.addEventListener("click", (evento) =>{
-     const idCard = Number(card.dataset.id)
+    card.addEventListener("click", () =>{
+    const idCard = Number(card.dataset.id)
 
     const cliente = lerClientes().find((cliente) => cliente.id === idCard)
     
@@ -304,10 +411,21 @@ function infoClientes(){
     const cnpj = document.getElementById("modalCNPJ");
     cnpj.textContent = cliente.cnpj;
 
-    const endereco = cliente.cidade + ", " + cliente.bairro + ", " + cliente.cep.value + ", " + cliente.rua
+    const mapa = cliente.cidade + ", " + cliente.bairro + ", " + cliente.rua
 
     const iframe = document.getElementById("iframe")
-    iframe.src = "https://www.google.com/maps?q=" + encodeURIComponent(endereco) + "&z=13&output=embed"
+    iframe.src = "https://www.google.com/maps?q=" + encodeURIComponent(mapa) + "&z=13&output=embed"
+
+    const responsavel = document.getElementById("nomeResponsavel")
+    responsavel.textContent = cliente.contato
+
+    const endereco = document.getElementById("enderecoEstabelecimento")
+    endereco.textContent = cliente.rua + ", Bairro " + cliente.bairro + ", Cidade: " + cliente.cidade + ", Estado: " + cliente.estado + ", CEP: " + cliente.cep
+
+    const telefone = document.getElementById("telefoneEstabelecimento")
+    const telefoneNormal = cliente.telefone.replace(/\D/g, "")
+    const telefoneFormatado = telefoneNormal.replace(/($1) $2-$3/)
+    telefone.textContent = telefoneFormatado
 
     })
   })
@@ -317,16 +435,24 @@ function infoClientes(){
 
 infoClientes()
 
-/*function btnElipse(){
-  const elipse = document.querySelectorAll(".btnElipse")
+/*function excluirCliente(){
 
 
-  elipse.forEach(botao => {
-    botao.addEventListener("click", () => {
+  const btnExcluir = document.querySelectorAll(".excluirCliente")
+
+  btnExcluir.forEach(btn => {
+    btn.addEventListener("click", () => {
+      console.log("Excluir")
+      const clientes = JSON.parse(localStorage.getItem("clientes"))
+      console.log(clientes)
+      const idClientes = clientes.id
+      console.log(idClientes)
       
-    })})
+  })
+  });
+  
     
 
 }
 
-btnElipse()*/
+excluirCliente()*/

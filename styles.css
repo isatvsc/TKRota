@@ -55,7 +55,7 @@ header{
     font-size: 12px;
     font-weight: 600;
     color: var(--text-color);
-    border-radius: 20px;
+    border-radius: 10px;
     list-style: none;
     cursor: pointer;
     transition: background-color 0.3s ease-in;
@@ -63,7 +63,7 @@ header{
 }
 
 .sidebar-content li:hover{
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: var(--gray-color);
 }
 
@@ -142,8 +142,9 @@ main{
 .middle .filtro button{
     border: none;
     padding: 10px 20px;
-    border-radius: 20px;
-    background-color: var(--gray-color);
+    border-radius: 10px;
+    background-color: var(--blue-color);
+    color: var(--white-color);
     cursor: pointer;
     font-weight: 600;
     font-size: 0.8rem;
@@ -184,8 +185,8 @@ main{
     width: 100%;
     background-color: var(--gray-color) ;
     font-size: 14px; 
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 5px 20px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -208,7 +209,7 @@ main{
 .btnElipse{
     margin-right: 10px;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 20px;
     border-radius: 50%;
     background: transparent;
 }
@@ -218,9 +219,21 @@ main{
 }
 
 .dropdown-menu{
-    padding: 20px !important;
+    padding: 15px !important;
     background-color: rgb(231, 231, 231) !important;
-    border-radius: 30px !important;
+    border-radius: 10px !important;
+}
+
+
+
+.dropdown-menu.show{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.dropdown-menu.filtro{
+    background-color: var(--white-color) !important;
+    font-size: 0.8rem !important;
 }
 
 .dropdown-item{
@@ -230,15 +243,37 @@ main{
 
 .dropdown-item:hover{
     background-color: var(--gray-color) !important;
-    border-radius: 30px !important;
+    border-radius: 5px !important;
 }
 
-.firstItem:hover{
+.excluirCliente:hover{
     background-color: rgba(204, 74, 100) !important;
     color: #fff !important;
 }
 
+.form-check-input{
+    background-color: var(--gray-color) !important;
+    border: 0.1px solid #16207c34 !important;
+}
 
+.form-check-input:checked{
+    background-color: #16207c !important;
+    border: none !important;
+}
+
+.aplicarFiltro{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.btnAplicarFiltro{
+    border: none;
+    background-color: var(--blue-color);
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+}
 
 .escondido{
     display: none !important;
@@ -247,6 +282,10 @@ main{
 
 
 /*      INFORMAÇÕES CLIENTE         */
+
+.modal-body{
+    height: 600px !important;
+}
 
 .modal-body .information{
     display: flex;
@@ -257,7 +296,7 @@ main{
     background-color: var(--blue-color);
     padding: 15px 20px 0;
     color: var(--white-color);
-    border-radius: 50px;
+    border-radius: 10px;
     width: 350px;
     height: 70px;
 }
@@ -275,6 +314,7 @@ main{
 .modal-body .information p{
     font-size: 0.8rem;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .modal-body .btnRota{
@@ -305,7 +345,45 @@ main{
     font-weight: 800;
 }
 
+.modal-body .infoClientes{
+    position: absolute;
+    top: 100px;
+}    
 
+.caixinhasInfo{
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--blue-color);
+    padding: 15px;
+    cursor: pointer;
+    width: 800px;
+}
+
+.caixinhasInfo:hover{
+    background-color: var(--gray-color2);
+    border-radius: 20px;
+}
+
+.caixinhasInfo h4{
+    margin-left: 30px;
+    align-content: baseline;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.information-toptext{
+    position: absolute;
+    bottom: 34px;
+    left: 62px;
+    color: var(--blue-color);
+}
+
+.information-toptext h6{
+    font-size: 0.6rem;
+    font-weight: 700;
+}
 
 .modal-footer .btn.btn-primary{
     background-color: var(--blue-color);
@@ -315,6 +393,8 @@ main{
     font-size: 0.9rem;
     font-weight: 600;
 }
+
+
 
 
 /*    FORM    */
@@ -355,4 +435,31 @@ form select{
 
 .erro {
   border: 1px solid red !important;
+}
+
+.toast-cnpj {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--white-color); 
+  color: var(--blue-color);
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 999999;
+  pointer-events: none; 
+  
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+
+.toast-cnpj.mostrar {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
